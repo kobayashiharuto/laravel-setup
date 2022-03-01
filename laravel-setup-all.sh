@@ -5,6 +5,13 @@ apt update && apt upgrade -y
 apt install -y apache2
 systemctl start apache2
 
+# apache設定
+apt install -y vim
+<<comment
+後は以下で設定を行うこと。ディレクトリは laravelプロジェクト/public を設定すること。
+https://qiita.com/shita_fontaine/items/40a086265f0cf07d10e0
+comment
+
 # php導入
 apt install -y software-properties-common # add-apt-repositoryのインストール
 LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php # php のリポジトリを追加
@@ -20,6 +27,6 @@ echo 2 | update-alternatives --config php
 php --ini | grep "Loaded Configuration File" | sed -e 's/.*: //g' | xargs sed -i -e "s/;extension=curl/extension=curl/g"
 
 # Laravelプロジェクトの作成
-# composer create-project laravel/laravel --prefer-dist laravel-test
-# cd laravel-test
-# composer install
+composer create-project laravel/laravel --prefer-dist laravel-test
+cd laravel-test
+composer install
